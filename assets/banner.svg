@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="420" viewBox="0 0 1400 420" role="img" aria-labelledby="title desc">
+<title id="title">GitHub Hourly Follow Automation</title>
+<desc id="desc">Dark navy technology banner with GitHub and automation motifs.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#151d36"/></linearGradient>
+ <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+ <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#8da2c8" stroke-opacity=".10"/></pattern>
+ <filter id="glow"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<rect width="1400" height="420" rx="28" fill="url(#bg)"/><rect width="1400" height="420" rx="28" fill="url(#grid)"/>
+<circle cx="1160" cy="205" r="150" fill="#7c3aed" opacity=".16" filter="url(#glow)"/>
+<g fill="none" stroke="url(#accent)" stroke-width="3" opacity=".8"><path d="M920 95h100v65h90"/><path d="M930 320h140v-65h105"/><path d="M1110 160v95"/><circle cx="1020" cy="95" r="6" fill="#22d3ee"/><circle cx="1110" cy="160" r="6" fill="#7c3aed"/><circle cx="1070" cy="320" r="6" fill="#22d3ee"/><circle cx="1175" cy="255" r="6" fill="#7c3aed"/></g>
+<g transform="translate(1010 115)"><circle cx="105" cy="90" r="78" fill="#111827" stroke="#53627f" stroke-width="2"/><path d="M105 28a58 58 0 0 0-18 113c3 1 4-1 4-3v-11c-16 4-20-7-20-7-3-7-7-9-7-9-6-4 1-4 1-4 6 0 10 6 10 6 5 10 14 7 17 5 1-4 3-7 5-8-13-2-27-7-27-29 0-7 3-13 7-18-1-2-3-9 1-18 0 0 6-2 19 7a65 65 0 0 1 35 0c13-9 19-7 19-7 4 9 2 16 1 18 5 5 7 11 7 18 0 22-14 27-27 29 3 3 5 7 5 13v15c0 2 1 4 4 3A58 58 0 0 0 105 28z" fill="#f8fafc"/></g>
+<g fill="#e5e7eb" font-family="Inter,Segoe UI,Arial,sans-serif"><text x="82" y="145" font-size="20" letter-spacing="5" fill="#a5b4fc">N8N • GITHUB API • AUTOMATION</text><text x="78" y="220" font-size="56" font-weight="750">GitHub Hourly Follow</text><text x="82" y="270" font-size="25" fill="#cbd5e1">A configurable workflow template for n8n</text><text x="82" y="315" font-size="22" fill="#a5f3fc">اتوماسیون GitHub با n8n</text></g>
+<rect x="82" y="348" width="250" height="5" rx="2.5" fill="url(#accent)"/>
+</svg>

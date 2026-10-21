@@ -2,125 +2,207 @@
 
 <img src="assets/banner.svg" alt="GitHub Follow Automation — n8n workflow" width="100%"/>
 
-# GitHub Hourly Follow Automation
+# 🚀 GitHub Hourly Follow Automation
 
-**A configurable n8n workflow template for learning GitHub API automation.**  
-**قالب گردش‌کار n8n برای یادگیری اتوماسیون GitHub API**
+### Grow your GitHub network with n8n
 
-[English](#english) · [فارسی](#فارسی)
+**A configurable workflow template that automates following accounts from a selected GitHub profile's follower list.**
 
-![n8n](https://img.shields.io/badge/n8n-workflow-EA4B71?style=for-the-badge&logo=n8n&logoColor=white)
-![GitHub API](https://img.shields.io/badge/GitHub-REST%20API-181717?style=for-the-badge&logo=github)
-![Status](https://img.shields.io/badge/status-template-blue?style=for-the-badge)
+قالبی برای خودکارسازی فالو کردن کاربران گیت‌هاب با n8n، با هدف کمک به رشد شبکه و افزایش دیده‌شدن پروفایل.
+
+<p>
+  <a href="#english"><img src="https://img.shields.io/badge/README-English-2563EB?style=for-the-badge&logo=readme&logoColor=white" alt="English README"/></a>
+  <a href="#فارسی"><img src="https://img.shields.io/badge/راهنما-فارسی-16A34A?style=for-the-badge&logo=readme&logoColor=white" alt="راهنمای فارسی"/></a>
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/n8n-workflow-EA4B71?style=flat-square&logo=n8n&logoColor=white" alt="n8n"/>
+  <img src="https://img.shields.io/badge/GitHub-REST%20API-181717?style=flat-square&logo=github" alt="GitHub REST API"/>
+  <img src="https://img.shields.io/badge/Language-JSON-64748B?style=flat-square&logo=json" alt="JSON"/>
+  <img src="https://img.shields.io/badge/Status-Importable%20Template-0F766E?style=flat-square" alt="Template status"/>
+</p>
+
+[**📦 View workflow**](workflows/github-hourly-follow.json) · [**🖼️ View banner**](assets/banner.svg) · [**⭐ Star this repo**](https://github.com/Royatvand/n8n-github-profile-follow)
 
 </div>
 
 ---
 
 <a id="english"></a>
+
 ## 🇬🇧 English
 
-### Overview
-This repository contains an importable n8n workflow template that demonstrates scheduled execution, paginated GitHub API requests, batch selection, and authenticated follow actions.
+## 🎯 What is this project for?
 
-> **Important:** This is an automation example, not a growth guarantee. Automatically following people at scale may be considered spam and may violate GitHub's terms or acceptable-use rules. Use only with accounts and targets you are authorized to manage, review each action, and respect platform limits. The workflow is intentionally **inactive** in the exported JSON.
+The goal is simple: **help you grow your GitHub network and potentially attract more profile followers** by automating a repetitive part of networking.
 
-### Workflow at a glance
-1. **Every Hour** — scheduled trigger, configured for hours 08:00–17:00 in the `Asia/Tehran` timezone.
-2. **Get Current Page** — calculates pagination and batch parameters.
-3. **Get Followers** — requests followers for a configurable GitHub username.
-4. **Pick Batch** — selects a batch of up to 40 users.
-5. **Follow User** — sends an authenticated GitHub API follow request, one item at a time with a 1.5-second interval.
-6. **Advance Page** — updates the saved pagination offset.
+The workflow retrieves accounts that follow a GitHub profile you choose, selects a batch, and sends follow requests through the GitHub API. Following relevant developers can sometimes increase profile visibility—but **there is no guarantee that anyone will follow you back**. A thoughtful profile, useful repositories, and genuine community participation still matter.
 
-### Files
-- `workflows/github-hourly-follow.json` — workflow export for n8n.
-- `assets/banner.svg` — repository banner.
+> [!IMPORTANT]
+> This workflow is provided as an editable template and is **inactive by default**. Automated or high-volume following may be treated as spam and could violate GitHub policies. Use it conservatively, follow current platform rules, and avoid unsolicited mass-following.
 
-### Requirements
-- A running n8n instance.
-- A GitHub API credential configured in n8n with the permissions required by the GitHub endpoint.
-- Familiarity with n8n workflows and GitHub's API limits.
+## ✨ Highlights
 
-### Import and configure
-1. Download `workflows/github-hourly-follow.json`.
-2. In n8n, choose **Import from File** and select the downloaded JSON.
-3. Keep the workflow inactive while reviewing and testing it.
-4. In **Get Followers**, replace `YOUR_TARGET_USERNAME` with a username whose public follower list you are allowed to process.
-5. Configure the GitHub credential on both HTTP Request nodes (**Get Followers** and **Follow User**).
-6. Review the schedule, batch size, and follow action before any manual test. Start with a small, controlled test and monitor execution results and API limits.
-7. Activate only if you understand the consequences and your use complies with GitHub's current rules.
+| | Feature | Details |
+|---|---|---|
+| ⏰ | Scheduled runs | Hourly trigger configured for 08:00–17:00, <code>Asia/Tehran</code> |
+| 👥 | Audience discovery | Reads the followers list of a configurable GitHub username |
+| 🧩 | Batch processing | Selects up to 40 accounts per batch |
+| 🔁 | Pagination | Advances through follower pages |
+| 🐢 | Request spacing | Configured with a 1.5-second interval in the follow step |
+| 🔐 | Safer template | Exported inactive; credential references removed |
 
-### Security and responsible use
-- Never commit personal access tokens, OAuth tokens, credential exports, or private user data.
-- The exported workflow has been made inactive and credential references have been removed.
-- The template follows accounts returned by the selected target user's followers endpoint. It does **not** verify whether each account is relevant or whether you already know them.
-- Do not use it for unsolicited mass-following, evasion of rate limits, or other spam-like behavior.
-- Check GitHub's current documentation and policies before use.
+## 🔄 How the workflow works
 
-### Disclaimer
-Provided for educational and personal automation experiments. Use at your own risk. This project is not affiliated with or endorsed by GitHub or n8n.
+```mermaid
+flowchart TD
+    A["⏰ Every Hour"] --> B["🧮 Get Current Page"]
+    B --> C["👥 Get Followers"]
+    C --> D["🧩 Pick Batch"]
+    D --> E["🤝 Follow User"]
+    E --> F["➡️ Advance Page"]
+    F -. "Next scheduled run" .-> A
+```
+
+### 📁 Project structure
+
+```text
+n8n-github-profile-follow/
+├── assets/
+│   └── banner.svg
+├── workflows/
+│   └── github-hourly-follow.json
+└── README.md
+```
+
+## ⚙️ Get started
+
+1. **Download** [github-hourly-follow.json](workflows/github-hourly-follow.json).
+2. Open n8n and choose **Import from File**.
+3. Keep the workflow **inactive** while you review its nodes and settings.
+4. In **Get Followers**, replace <code>YOUR_TARGET_USERNAME</code> with the intended public GitHub username.
+5. Configure your GitHub credentials in both **Get Followers** and **Follow User**.
+6. Review the schedule, pagination, batch size, permissions, and API limits. Test carefully with a small, controlled run.
+7. Activate it only if your intended use complies with GitHub's current terms and policies.
+
+## 📈 Tips for real GitHub growth
+
+- **Follow relevant developers**, not random accounts.
+- Make your profile README clear and keep your best projects easy to find.
+- Publish useful code, document your projects, and contribute to repositories in your field.
+- Avoid sudden, repetitive, or high-volume follow activity.
+- Measure meaningful engagement over time; do not treat follow-backs as guaranteed.
+
+## 🛡️ Security & responsible use
+
+- Never commit access tokens, OAuth secrets, exported credentials, or private user data.
+- The workflow JSON has been exported inactive and its credential references have been removed; configure credentials locally in n8n.
+- The workflow targets accounts in the selected profile's followers list. It does not determine whether those accounts are relevant, whether you already follow them, or whether they will follow you back.
+- Do not use the project to evade rate limits or conduct spam-like activity.
+- Check GitHub's current documentation and policies before running it.
+
+## 🧰 Requirements
+
+- A working n8n instance.
+- A GitHub credential configured inside n8n with the permissions required by the relevant API endpoints.
+- Basic familiarity with n8n and the GitHub REST API.
+
+## ⚠️ Disclaimer
+
+This is an independent educational automation project. It is not affiliated with or endorsed by GitHub or n8n. Use responsibly and at your own risk.
 
 ---
 
 <a id="فارسی"></a>
+
 ## 🇮🇷 فارسی
 
-### معرفی
-این مخزن شامل یک گردش‌کار قابل‌ورود به n8n است که اجرای زمان‌بندی‌شده، صفحه‌بندی درخواست‌های GitHub API، انتخاب دسته‌ای از کاربران و ارسال درخواست Follow را نمایش می‌دهد.
+## 🎯 هدف پروژه چیه؟
 
-> **هشدار مهم:** این پروژه صرفاً یک نمونه آموزشی است و افزایش فالوئر را تضمین نمی‌کند. فالو کردن خودکار تعداد زیادی حساب ممکن است اسپم محسوب شود یا با قوانین و سیاست‌های GitHub مغایرت داشته باشد. فقط در محدوده مجاز و با بررسی نتایج از آن استفاده کن. فایل خروجی عمداً در حالت **غیرفعال** قرار گرفته است.
+هدف پروژه مشخصه: **کمک به رشد شبکه ارتباطی گیت‌هاب و بیشتر شدن احتمال دیده‌شدن پروفایل و جذب فالوئر** با خودکار کردن بخشی از فرایند فالو کردن.
 
-### گردش‌کار چگونه کار می‌کند؟
-1. **Every Hour** — اجرا در ساعت‌های ۰۸ تا ۱۷ بر اساس منطقه زمانی `Asia/Tehran`.
-2. **Get Current Page** — محاسبه شماره صفحه و اندازه دسته.
-3. **Get Followers** — دریافت فهرست دنبال‌کنندگان یک نام کاربری مشخص در GitHub.
-4. **Pick Batch** — انتخاب حداکثر ۴۰ کاربر در هر اجرا.
-5. **Follow User** — ارسال درخواست Follow با اعتبارنامه GitHub و فاصله ۱٫۵ ثانیه بین درخواست‌ها.
-6. **Advance Page** — به‌روزرسانی موقعیت صفحه‌بندی ذخیره‌شده.
+این گردش‌کار فهرست دنبال‌کنندگان یک پروفایل انتخابی گیت‌هاب رو دریافت می‌کنه، تعدادی از حساب‌ها رو انتخاب می‌کنه و از طریق GitHub API درخواست Follow می‌فرسته. فالو کردن برنامه‌نویس‌های مرتبط ممکنه باعث بیشتر دیده‌شدن پروفایلت بشه؛ اما **هیچ تضمینی وجود نداره که اون‌ها هم تو رو فالو کنن**. پروفایل خوب، پروژه‌های کاربردی و مشارکت واقعی در جامعه برنامه‌نویسی همچنان مهم‌اند.
 
-### فایل‌های مخزن
-- `workflows/github-hourly-follow.json` — فایل قابل ورود به n8n.
-- `assets/banner.svg` — بنر گرافیکی مخزن.
+> [!IMPORTANT]
+> این پروژه یک قالب قابل‌ویرایشه و به‌صورت پیش‌فرض **غیرفعال** منتشر شده. فالو خودکار یا پرتعداد ممکنه اسپم محسوب بشه و با سیاست‌های گیت‌هاب مغایرت داشته باشه. با احتیاط، در چارچوب قوانین و بدون فالو انبوه ناخواسته ازش استفاده کن.
 
-### پیش‌نیازها
-- نصب و اجرای n8n.
-- تنظیم Credential مربوط به GitHub در n8n با مجوزهای لازم.
-- آشنایی مقدماتی با گردش‌کارهای n8n و محدودیت‌های GitHub API.
+## ✨ امکانات اصلی
 
-### نصب و راه‌اندازی
-1. فایل `workflows/github-hourly-follow.json` را دانلود کن.
-2. در n8n گزینه **Import from File** را انتخاب و فایل JSON را وارد کن.
-3. هنگام بررسی و آزمایش، گردش‌کار را غیرفعال نگه دار.
-4. در نود **Get Followers** مقدار `YOUR_TARGET_USERNAME` را با نام کاربری موردنظر جایگزین کن.
-5. Credential مربوط به GitHub را در هر دو نود **Get Followers** و **Follow User** تنظیم کن.
-6. زمان‌بندی، تعداد کاربران هر دسته و عملکرد Follow را بررسی کن. ابتدا فقط یک آزمایش محدود انجام بده و گزارش اجرا و محدودیت API را زیر نظر بگیر.
-7. فقط در صورتی گردش‌کار را فعال کن که از پیامدها آگاه باشی و استفاده‌ات با قوانین جاری GitHub سازگار باشد.
+| | قابلیت | توضیحات |
+|---|---|---|
+| ⏰ | اجرای زمان‌بندی‌شده | اجرای ساعتی در بازه ۰۸ تا ۱۷، با منطقه زمانی <code>Asia/Tehran</code> |
+| 👥 | پیدا کردن مخاطب | دریافت فهرست فالوئرهای یک نام کاربری مشخص |
+| 🧩 | پردازش دسته‌ای | انتخاب حداکثر ۴۰ حساب در هر دسته |
+| 🔁 | صفحه‌بندی | رفتن به صفحه بعدی فهرست فالوئرها |
+| 🐢 | فاصله بین درخواست‌ها | فاصله تنظیم‌شده ۱٫۵ ثانیه در مرحله Follow |
+| 🔐 | قالب امن‌تر | فایل خروجی غیرفعال است و ارجاع‌های Credential از آن حذف شده‌اند |
 
-### امنیت و استفاده مسئولانه
-- توکن دسترسی، اطلاعات ورود، خروجی Credential یا داده خصوصی کاربران را در مخزن قرار نده.
-- نسخه منتشرشده غیرفعال است و شناسه‌های Credential از آن حذف شده‌اند.
-- این گردش‌کار حساب‌های موجود در فهرست دنبال‌کنندگان کاربر هدف را دنبال می‌کند؛ ارتباط یا مناسب‌بودن آن حساب‌ها را بررسی نمی‌کند.
-- از آن برای فالو انبوه ناخواسته، دور زدن محدودیت‌ها یا رفتارهای مشابه اسپم استفاده نکن.
-- پیش از استفاده، مستندات و سیاست‌های فعلی GitHub را بررسی کن.
+## 🔄 روند اجرای گردش‌کار
 
-### سلب مسئولیت
-این پروژه برای یادگیری و آزمایش اتوماسیون شخصی ارائه شده است. استفاده از آن بر عهده خود کاربر است و وابستگی یا تأیید رسمی از سوی GitHub یا n8n ندارد.
+```mermaid
+flowchart TD
+    A["⏰ اجرای زمان‌بندی‌شده"] --> B["🧮 بررسی صفحه فعلی"]
+    B --> C["👥 دریافت فالوئرها"]
+    C --> D["🧩 انتخاب یک دسته"]
+    D --> E["🤝 ارسال Follow"]
+    E --> F["➡️ رفتن به صفحه بعد"]
+    F -. "اجرای زمان‌بندی بعدی" .-> A
+```
 
----
+### 📁 ساختار پروژه
 
-## 🏷️ Repository metadata
+```text
+n8n-github-profile-follow/
+├── assets/
+│   └── banner.svg
+├── workflows/
+│   └── github-hourly-follow.json
+└── README.md
+```
 
-**Description (English):**  
-`An educational n8n workflow template for scheduled GitHub API pagination and follow automation, with configurable targets and responsible-use guidance.`
+## ⚙️ راه‌اندازی
 
-**Topics / Tags:**  
-`n8n`, `n8n-workflow`, `github-api`, `automation`, `workflow-automation`, `javascript`, `api-integration`, `developer-tools`
+1. فایل [github-hourly-follow.json](workflows/github-hourly-follow.json) رو دریافت کن.
+2. وارد n8n شو و گزینه **Import from File** رو بزن.
+3. هنگام بررسی تنظیمات، گردش‌کار رو **غیرفعال** نگه دار.
+4. در نود **Get Followers** مقدار <code>YOUR_TARGET_USERNAME</code> رو با نام کاربری عمومی موردنظر جایگزین کن.
+5. در هر دو نود **Get Followers** و **Follow User**، Credential گیت‌هاب رو تنظیم کن.
+6. زمان‌بندی، صفحه‌بندی، اندازه دسته، مجوزها و محدودیت‌های API رو بررسی کن. اول یک آزمایش کوچک و کنترل‌شده انجام بده.
+7. فقط زمانی فعالش کن که مطمئن شدی روش استفاده‌ات با قوانین جاری گیت‌هاب سازگاره.
+
+## 📈 چطور واقعاً فالوئر گیت‌هاب رو بیشتر کنیم؟
+
+- **برنامه‌نویس‌های مرتبط با حوزه خودت** رو دنبال کن، نه حساب‌های تصادفی.
+- README پروفایلت رو مرتب کن و بهترین پروژه‌هات رو در معرض دید قرار بده.
+- پروژه‌های کاربردی منتشر کن و برای هرکدوم توضیحات و راهنمای واضح بنویس.
+- از فالو کردن پرتعداد، تکراری و ناگهانی دوری کن.
+- رشد تعامل واقعی رو در طول زمان بررسی کن؛ فالو بک تضمینی نیست.
+
+## 🛡️ امنیت و استفاده مسئولانه
+
+- توکن دسترسی، رمز OAuth، خروجی Credential یا اطلاعات خصوصی کاربران رو در مخزن منتشر نکن.
+- فایل JSON غیرفعال منتشر شده و ارجاع‌های Credential از اون حذف شده‌اند؛ اعتبارنامه‌ها رو فقط داخل n8n تنظیم کن.
+- این گردش‌کار حساب‌های موجود در فهرست فالوئرهای پروفایل انتخابی رو هدف می‌گیره. مرتبط بودن حساب‌ها، فالو بودن قبلی یا فالو بک دادن اون‌ها رو بررسی نمی‌کنه.
+- از پروژه برای دور زدن محدودیت API یا فعالیت‌های مشابه اسپم استفاده نکن.
+- پیش از اجرا، مستندات و سیاست‌های فعلی گیت‌هاب رو بررسی کن.
+
+## 🧰 پیش‌نیازها
+
+- یک نمونه فعال از n8n.
+- تنظیم Credential گیت‌هاب با مجوزهای لازم برای endpointهای مورد استفاده.
+- آشنایی مقدماتی با n8n و GitHub REST API.
+
+## ⚠️ سلب مسئولیت
+
+این پروژه مستقل و آموزشی است و وابستگی یا تأیید رسمی از سوی GitHub یا n8n ندارد. استفاده از آن بر عهده خود کاربر است.
 
 ---
 
 <div align="center">
 
-Made for learning automation · ساخته‌شده برای یادگیری اتوماسیون
+**Built to grow your network, one meaningful connection at a time.**  
+**برای رشد شبکه ارتباطی، با تمرکز روی ارتباط‌های ارزشمند.**
+
+⭐ اگر پروژه برات مفید بود، به مخزن Star بده.
 
 </div>
